@@ -38,7 +38,15 @@ export default {
       affectedLayersIds: [],
       selectedItem: null,
       selectedItems: [],
-      insetHeaders: [],
+      insetHeaders: [
+        {
+          "name": "Зоны действия документов",
+          "id": "2bd50162-47f0-45b6-9546-7c4edb4e0d16"
+        }, {
+          "name": "Зоны действия документов инженерных изысканий ГИСОГД",
+          "id": "ec337233-236c-48ad-b125-c7f442199376"
+        }
+      ],
       count: null,
       params: {
         page: 1,
@@ -225,8 +233,9 @@ export default {
     onSelectItem (item) {
       this.selectedItem = item
     },
-    async getLayerSettings (currentUseLayerId) {
-      const settingsLayer = await getAdminLayerSetting(currentUseLayerId)
+    getLayerSettings () {
+      console.log('getLayerSetting')
+      const settingsLayer = getAdminLayerSetting()
       console.log('разрешенные колонки')
       console.log('settingsLayer')
       console.log(settingsLayer)
@@ -287,7 +296,8 @@ export default {
     },
     resultsLayers () {
       this.getItems()
-      this.getLayerSettings(this.resultsLayers[0].layerId)
+      // this.getLayerSettings(this.resultsLayers[0].layerId)
+      this.getLayerSettings()
       this.sortingBy()
     }
   },
