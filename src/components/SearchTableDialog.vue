@@ -1,9 +1,5 @@
 <template>
-  <div>
-    Это searchTable dialog
-    {{ loacalData }}
-  </div>
-  <!-- <div class="searchTableDialog" :class="{ collapseSeachTable: isMapSearchTableCollapse }" v-if="isMapSearchTableVisible">
+  <div class="searchTableDialog" :class="{ collapseSeachTable: isMapSearchTableCollapse }" v-if="isMapSearchTableVisible">
     <data-table
       class="flex-1"
       :propItems="sortItems"
@@ -23,17 +19,18 @@
       ref="table-search">
     </data-table>
 
-  </div> -->
+  </div>
 </template>
 
 <script>
 import { list } from './data/localData'
 // import { mapState } from 'vuex'
-// import DataTable from './Tables/DataTable'
+import DataTable from './Tables/DataTable'
 import { getAdminLayerSetting } from './layerSettings.js'
 // import { zoomAndHighlightObjectsOnMap, clearHighlightedObjectsOnMap } from '^/components/map/map'
 
 export default {
+  name: 'search-table-dialog',
   data () {
     return {
       items: [],
@@ -61,7 +58,9 @@ export default {
       searchId: null,
       selectedRow: {},
       noData: false,
-      loacalData: list
+      loacalData: list,
+      isMapSearchTableVisible: true,
+      isMapSearchTableCollapse: true,
     }
   },
   mounted () {
@@ -291,7 +290,7 @@ export default {
     }
   },
   components: {
-    // DataTable
+    DataTable
   }
 }
 </script>

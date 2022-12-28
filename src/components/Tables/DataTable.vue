@@ -29,9 +29,9 @@
           <button class="btn btn-default btn-icon" @click="exportToXLSX">
             <i class="icon_file_excel" title="Экспорт в xlsx"></i>
           </button>
-          <button class="btn btn-default btn-icon" @click="getCoord">
+          <!-- <button class="btn btn-default btn-icon" @click="getCoord">
             <i class="icon_location" title="Экспорт координат"></i>
-          </button>
+          </button> -->
           <button class="btn btn-default btn-icon" @click="openCoordModal">
             <i class="icon_square_down" title="Координаты объекта (json)"></i>
           </button>
@@ -87,13 +87,14 @@ import DataTableHeader from './DataTableHeader'
 import DataTableFilters from './DataTableFilters'
 import DataTableBody from './DataTableBody'
 import DataTableFooter from './DataTableFooter'
-import descriptionHelper from '^/components/map/descriptionHelper'
-import getFlatCoordinates from '^/helpers/getFlatCoordinates.js'
-import CoordinateTransformModal from '^/components/map/CoordinateTransformModal'
+// import descriptionHelper from '^/components/map/descriptionHelper'
+// import getFlatCoordinates from '^/helpers/getFlatCoordinates.js'
+// import CoordinateTransformModal from '^/components/map/CoordinateTransformModal'
 import SearchEntityDescription from '../Modals/SearchEntityDescription'
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
+  name: 'dataTable',
   props: {
     columns: Array,
     insetHeaders: Array,
@@ -106,10 +107,10 @@ export default {
     count: Number,
     filterable: Boolean
   },
-  mixins: [descriptionHelper],
+  // mixins: [descriptionHelper],
   components: {
     DataTableInset,
-    CoordinateTransformModal,
+    // CoordinateTransformModal,
     DataTableHeader,
     DataTableFilters,
     DataTableBody,
@@ -131,7 +132,8 @@ export default {
       size: 10,
       from: 1,
       to: 10,
-      tooltipShow: false
+      tooltipShow: false,
+      isMapSearchTableCollapse: false
     }
   },
   watch: {
@@ -146,9 +148,9 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      isMapSearchTableCollapse: state => state.isMapSearchTableCollapse
-    }),
+    // ...mapState({
+    //   isMapSearchTableCollapse: state => state.isMapSearchTableCollapse
+    // }),
     calculatedColumns () {
       if (!this.columns || !this.columns.length) {
         return []
@@ -246,15 +248,15 @@ export default {
         this.coreApi.download.downloadFileAxios(`/api/xlsx/objects/export`, { data })
       }
     },
-    getCoord () {
-      if (this.arrSelected.length !== 1) {
-        this.isShowTooltip()
-      } else {
-        console.log('this.findSelectItem')
-        console.log(this.findSelectItem)
-        getFlatCoordinates(this.findSelectItem)
-      }
-    },
+    // getCoord () {
+    //   if (this.arrSelected.length !== 1) {
+    //     this.isShowTooltip()
+    //   } else {
+    //     console.log('this.findSelectItem')
+    //     console.log(this.findSelectItem)
+    //     getFlatCoordinates(this.findSelectItem)
+    //   }
+    // },
     openCoordModal () {
       this.$refs.setComponent
       this.$refs.coordinateModal.openModal()
