@@ -1,6 +1,7 @@
 <template>
   <div>
     Это searchTable dialog
+    {{ loacalData }}
   </div>
   <!-- <div class="searchTableDialog" :class="{ collapseSeachTable: isMapSearchTableCollapse }" v-if="isMapSearchTableVisible">
     <data-table
@@ -26,7 +27,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { list } from './data/localData'
+// import { mapState } from 'vuex'
 // import DataTable from './Tables/DataTable'
 import { getAdminLayerSetting } from './layerSettings.js'
 // import { zoomAndHighlightObjectsOnMap, clearHighlightedObjectsOnMap } from '^/components/map/map'
@@ -58,7 +60,8 @@ export default {
       countSearchLayers: null,
       searchId: null,
       selectedRow: {},
-      noData: false
+      noData: false,
+      loacalData: list
     }
   },
   mounted () {
@@ -256,12 +259,12 @@ export default {
     itemsRightTable () {
       return this.results
     },
-    ...mapState({
-      results: state => state.searchResults,
-      resultsLayers: state => state.searchLayersResults,
-      isMapSearchTableVisible: state => state.isMapSearchTableVisible,
-      isMapSearchTableCollapse: state => state.isMapSearchTableCollapse
-    }),
+    // ...mapState({
+    //   results: state => state.searchResults,
+    //   resultsLayers: state => state.searchLayersResults,
+    //   isMapSearchTableVisible: state => state.isMapSearchTableVisible,
+    //   isMapSearchTableCollapse: state => state.isMapSearchTableCollapse
+    // }),
     layersOnMap () {
       let layers = [...this.layers]
       layers.shift()
