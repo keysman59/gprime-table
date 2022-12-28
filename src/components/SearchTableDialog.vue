@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { list } from './data/localData'
+import { list, localResult } from './data/localData'
 // import { mapState } from 'vuex'
 import DataTable from './Tables/DataTable'
 import { getAdminLayerSetting } from './layerSettings.js'
@@ -59,8 +59,10 @@ export default {
       selectedRow: {},
       noData: false,
       loacalData: list,
+      results: localResult,
+      resultsLayers: localResult,
       isMapSearchTableVisible: true,
-      isMapSearchTableCollapse: true,
+      isMapSearchTableCollapse: false,
     }
   },
   mounted () {
@@ -264,11 +266,11 @@ export default {
     //   isMapSearchTableVisible: state => state.isMapSearchTableVisible,
     //   isMapSearchTableCollapse: state => state.isMapSearchTableCollapse
     // }),
-    layersOnMap () {
-      let layers = [...this.layers]
-      layers.shift()
-      return layers
-    }
+    // layersOnMap () {
+    //   let layers = [...this.layers]
+    //   layers.shift()
+    //   return layers
+    // }
   },
   watch: {
     selectedResult (newValue) {

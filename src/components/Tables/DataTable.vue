@@ -63,11 +63,11 @@
       :pageSize="size"
       @change="onPage"
     />
-    <coordinate-transform-modal
+    <!-- <coordinate-transform-modal
     :geometry="findSelectItem ? findSelectItem.geometry : null"
     :featureSrid="findSelectItem ? findSelectItem.crs : null"
     ref="coordinateModal"
-   />
+   /> -->
     <search-entity-description
       :selectedRow="selectedRow"
       ref="searchDescription"
