@@ -73,10 +73,11 @@ export default {
       isMapSearchTableCollapse: false,
     }
   },
-  mounted () {
+  created () {
     // this.getItems()
-    this.results = localResult
-    this.resultsLayers = localResult
+    this.getItems()
+    this.getLayerSettings()
+    this.sortingBy()
   },
   props: {
     map: Object,
@@ -115,7 +116,9 @@ export default {
     },
     getItems () {
       console.log('получить итемы')
-      this.items = [...this.resultsLayers]
+      this.results = localResult
+      this.items = [...localResult]
+      this.getLayerSettings()
       this.getInsetLayersIds()
       this.getFilterItems()
     },
@@ -245,7 +248,7 @@ export default {
       console.log('алиасы')
       console.log(settingsLayer.layerSetting.settings.aliases)
       // let allowColumns = settingsLayer.allowedAttributes
-      
+
       let allowColumns = settingsLayer.layerSetting.settings.allowedAttributes
       if (!allowColumns.length) {
         this.noData = true
@@ -311,12 +314,6 @@ export default {
       this.selectedResult = null
     },
     sortField () {
-      this.sortingBy()
-    },
-    resultsLayers () {
-      this.getItems()
-      // this.getLayerSettings(this.resultsLayers[0].layerId)
-      this.getLayerSettings()
       this.sortingBy()
     }
   },
