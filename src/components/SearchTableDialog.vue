@@ -76,11 +76,10 @@ export default {
   created () {
     // this.getItems()
     this.getItems()
-    this.getLayerSettings()
+    console.log('перед sortingBy')
     this.sortingBy()
   },
   props: {
-    map: Object,
     layers: Array
   },
   methods: {
@@ -118,21 +117,28 @@ export default {
       console.log('получить итемы')
       this.results = localResult
       this.items = [...localResult]
+      this.resultsLayers = [...localResult]
       this.getLayerSettings()
+      console.log('перед getInsetLayersIds')
       this.getInsetLayersIds()
       this.getFilterItems()
     },
     getFilterItems () {
+      console.log('getFilterItems start')
       let obj = {}
       let result = []
       let resultManyObjects = []
       if (this.countSearchLayers === 1) {
+        console.log('countSearchLayers == 1')
+        console.log('this.resultsLayers')
+        console.log(this.resultsLayers)
         result = this.resultsLayers.filter(el => el.layerId === this.affectedLayersIds[0])
         obj.layerId = result[0].layerId
         obj.items = result
         this.items = obj.items
       }
       if (this.countSearchLayers > 1) {
+        console.log('countSearchLayers > 1')
         for (let i = 0; i < this.countSearchLayers; i++) {
           result = this.resultsLayers.filter(el => el.layerId === this.affectedLayersIds[i])
           obj.layerId = result[0].layerId
@@ -153,24 +159,39 @@ export default {
       this.sortingBy()
     },
     getInsetLayersIds () {
+      console.log('getInsetLayersIds start')
       let arr = []
+      console.log('this.items')
+      console.log(this.items)
+      console.log('this.items.length')
+      console.log(this.items.length)
       if (this.items.length) {
         let nonRepeatLayers = this.items.map(e => e.layerId)
+        console.log('nonRepeatLayers')
+        console.log(nonRepeatLayers)
         arr.push(nonRepeatLayers[0])
         nonRepeatLayers.forEach(item => {
           if (!(arr.indexOf(item) + 1)) {
             arr.push(item)
           }
         })
+        console.log('arr')
+        console.log(arr)
         this.countSearchLayers = arr.length
         this.affectedLayersIds = arr
         this.getInsetLayersObjs(arr)
       }
     },
     getInsetLayersObjs (arr) {
+      console.log('arr:')
+      console.log(arr)
       if (arr.length) {
+        console.log('this.layers')
+        console.log(this.layers)
         let layers = [...this.layers]
         layers.shift()
+        console.log('this.layers after shift')
+        console.log(this.layers)
         let miniObj = {}
         let trueLayers = []
         arr.forEach(layer => {
@@ -183,6 +204,8 @@ export default {
             miniObj = {}
           }
         })
+        console.log('trueLayers')
+        console.log(trueLayers)
         this.insetHeaders = trueLayers
       }
     },
@@ -191,6 +214,7 @@ export default {
       this.getFilterItems()
     },
     sortingBy () {
+      console.log('sortingBy')
       let sortItems = [...this.items]
       let index = sortItems[0].attributes.findIndex(x => x.name === this.sortField)
       if (this.sortField) {

@@ -1,11 +1,14 @@
 <template>
   <div id="app">
-    <search-table-dialog></search-table-dialog>
+    <search-table-dialog
+      :layers="localLayers"
+    ></search-table-dialog>
   </div>
 </template>
 
 <script>
 import SearchTableDialog from './components/SearchTableDialog.vue'
+import { layers } from './components/data/layers.js'
 
 export default {
   name: 'App-main',
@@ -14,7 +17,7 @@ export default {
   },
   data() {
     return { 
-      count: 4 
+      localLayers: layers
     }
   },
   components: {
