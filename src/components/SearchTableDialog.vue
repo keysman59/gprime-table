@@ -67,14 +67,16 @@ export default {
       selectedRow: {},
       noData: false,
       loacalData: list,
-      results: localResult,
-      resultsLayers: localResult,
+      results: [],
+      resultsLayers: [],
       isMapSearchTableVisible: true,
       isMapSearchTableCollapse: false,
     }
   },
   mounted () {
     // this.getItems()
+    this.results = localResult
+    this.resultsLayers = localResult
   },
   props: {
     map: Object,
@@ -243,6 +245,7 @@ export default {
       console.log('алиасы')
       console.log(settingsLayer.layerSetting.settings.aliases)
       // let allowColumns = settingsLayer.allowedAttributes
+      
       let allowColumns = settingsLayer.layerSetting.settings.allowedAttributes
       if (!allowColumns.length) {
         this.noData = true
@@ -262,7 +265,23 @@ export default {
           }
         }
       })
-      this.columns = arrColumns
+
+      let localColumns = [{
+          "title": "Вид документа",
+          "field": "document_type"
+      }, {
+          "title": "Тип документа",
+          "field": "document_relevancy"
+      }, {
+          "title": "Служба ИСОГД",
+          "field": "isogd_service"
+      }, {
+          "title": "Территория",
+          "field": "territory"
+      }]
+
+      // this.columns = arrColumns
+      this.columns = localColumns
     }
   },
   computed: {
@@ -320,7 +339,7 @@ export default {
   width: 80%;
   max-width: 1040px;
   right: 0;
-  margin-right: 366px;
+  margin-right: 200px;
   background: white;
   height: 85%;
   max-height: 678px;
@@ -340,7 +359,8 @@ export default {
       width: 80%;
       max-width: 1040px;
       right: 0;
-      margin-right: 25.1%;
+      /* margin-right: 25.1%; */
+      margin-right: 100px;
       background: white;
       height: 85%;
       max-height: 678px;

@@ -1,4 +1,4 @@
-async function getAdminLayerSetting (layerId) {
+async function getAdminLayerSetting () {
 
   let obj = {
     "id": "2bd50162-47f0-45b6-9546-7c4edb4e0d16",
@@ -138,59 +138,5 @@ async function getAdminLayerSetting (layerId) {
 
   return obj
 }
-
-async function zoomAndHighlightObjectsOnMap (items, map, maxZoomToPoints) {
-  if (!items || items.length === 0) {
-    return
-  }
-  console.log(maxZoomToPoints)
-  var geometries = []
-  for (let item of items) {
-    try {
-      const convertedGeometry = await getItemGeometry(item)
-      if (convertedGeometry) {
-        geometries.push(convertedGeometry)
-      }
-    } catch (error) {
-      console.warn('не удалось преобразовать геометрию объекта')
-    }
-  }
-
-  if (!geometries || geometries.length === 0) {
-    return
-  }
-
-  // var extent = getGeometriesExtent(geometries)
-
-  // zoomToGeometryOrExtentOnMap(extent, map, maxZoomToPoints)
-  await highlightGeometriesOnMap(geometries, map)
-}
-
-async function zoomToGeometryOrExtentOnMap (geometryOrExtent, map, maxZoomToPoints) {
-  let padding = [0, 0, 0, 0]
-
-  if (document.documentElement.clientWidth > 768) {
-    var sideBarMini = document.getElementsByClassName('sidenav-mini')[0]
-    var pane = document.getElementsByClassName('pane')[0]
-    var layerObject = document.getElementsByClassName('layer-object')[0]
-    if (sideBarMini) {
-      padding[3] = padding[3] + sideBarMini.clientWidth
-    }
-    if (pane) {
-      padding[3] = padding[3] + pane.clientWidth
-    }
-    if (layerObject) {
-      padding[2] = layerObject.clientHeight
-    }
-  }
-
-  let maxZoom = 17
-  if (geometryOrExtent[0] === geometryOrExtent[2] && geometryOrExtent[1] === geometryOrExtent[3] && maxZoomToPoints) {
-    maxZoom = maxZoomToPoints
-  }
-  map.getView().fit(geometryOrExtent, { maxZoom: maxZoom, padding: padding })
-}
-
-
 
 export { getAdminLayerSetting }
