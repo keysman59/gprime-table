@@ -165,6 +165,7 @@ export default {
   mounted () {
     this.items = this.propItems
     this.isFilterItems()
+    this.setupColumns()
   },
   methods: {
     showMore () {
@@ -353,6 +354,7 @@ export default {
       return width
     },
     setupColumns () {
+      console.log('setupColumns start')
       this.sorting = this.columns.map(x => ({
         column: x,
         calculatedWidth: this.calculateColumnWidth(x)

@@ -294,20 +294,21 @@ export default {
       })
 
       let localColumns = [{
-          "title": "Вид документа",
-          "field": "document_type"
+        "title": "Вид документа",
+        "field": "document_type"
       }, {
-          "title": "Тип документа",
-          "field": "document_relevancy"
+        "title": "Тип документа",
+        "field": "document_relevancy"
       }, {
-          "title": "Служба ИСОГД",
-          "field": "isogd_service"
+        "title": "Служба ИСОГД",
+        "field": "isogd_service"
       }, {
-          "title": "Территория",
-          "field": "territory"
+        "title": "Территория",
+        "field": "territory"
       }]
 
       // this.columns = arrColumns
+      console.log('перед установкой колонок')
       this.columns = localColumns
     }
   },
